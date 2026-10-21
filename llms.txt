@@ -1,0 +1,35 @@
+# Tone Generator - Online Acoustics & Audio Frequency Tool
+> https://ahmedelazabdev.github.io/tonegenerator/
+
+## Overview
+Tone Generator is a web application designed for audio engineers, sound designers, musicians, and acousticians. It leverages the client-side HTML5 Web Audio API to produce real-time, zero-latency, mathematically accurate sound frequencies ranging from 1 Hz up to 20,000 Hz.
+
+## Technical Specifications
+- Engine: Web Audio API (AudioContext, OscillatorNode, GainNode).
+- Latency: Hardware native (~0ms buffer latency, client-side synthesis).
+- Waveforms:
+  - Sine: Pure harmonic spectrum ($f_0$ fundamental only).
+  - Square: Odd mathematical harmonics ($f_0, 3f_0, 5f_0 \dots$) with $1/n$ amplitude roll-off.
+  - Triangle: Odd mathematical harmonics with $1/n^2$ amplitude roll-off.
+  - Sawtooth: Continuous complete harmonic spectrum (all integer multiples $n \cdot f_0$).
+- Frequency Bounds: 1 Hz to 20,100 Hz.
+- Master Volume: Anti-click parameterized gain ramping via setTargetAtTime.
+
+## Key Formulas
+- Speed of Sound: $v \approx 343 \text{ m/s}$ at $20^\circ\text{C}$ in atmospheric air.
+- Acoustic Wavelength: $\lambda = \frac{v}{f}$
+- Musical Pitch (MIDI conversion):
+  $n = 69 + 12 \log_2\left(\frac{f}{440}\right)$
+- Cents deviation:
+  $\text{cents} = (n - \text{round}(n)) \times 100$
+
+## Acoustic Bands
+- Sub-Bass: 20 Hz to 60 Hz
+- Bass: 60 Hz to 250 Hz
+- Low Midrange: 250 Hz to 500 Hz
+- Midrange: 500 Hz to 2,000 Hz
+- Upper Midrange / Presence: 2,000 Hz to 6,000 Hz
+- Brilliance / High Treble: 6,000 Hz to 20,000 Hz
+
+## Usage Guidelines & Safety
+Continuous exposure to high-amplitude high frequencies (>8 kHz) or sub-audible high-excursion frequencies (<30 Hz) can damage listening gear or induce auditory fatigue. Always calibrate levels beginning below 25% master gain.
