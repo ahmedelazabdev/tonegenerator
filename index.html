@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- High-CTR SEO Meta -->
+  <title>Tone Generator 🔊 Free Online Frequency Sound &amp; Pitch Generator (20Hz - 20kHz)</title>
+  <meta name="description" content="Generate pure audio tones, sine, square, triangle, and sawtooth waves from 1 Hz to 20,000 Hz. Real-time pitch tuning (440Hz, 432Hz), speaker calibration, hearing check, and acoustics testing. 100% free and in-browser.">
+  <meta name="keywords" content="tone generator, online frequency generator, sound generator, sine wave generator, 440 hz tone, 432 hz generator, audio test tone, pitch generator, speaker test, hearing test frequency, web audio tone">
+  <meta name="author" content="Ahmed Elazab">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  
+  <!-- Absolute Canonical URL -->
+  <link rel="canonical" href="https://ahmedelazabdev.github.io/tonegenerator/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ahmedelazabdev.github.io/tonegenerator/">
+  <meta property="og:title" content="Tone Generator 🔊 Online Frequency &amp; Pitch Sound Generator">
+  <meta property="og:description" content="Generate pure audio tones, calibrate audio monitors, find musical pitches, and test hearing ranges from 1Hz to 20,000Hz in real-time.">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tone Generator 🔊 Free Sound Frequency &amp; Waveform Tool">
+  <meta name="twitter:description" content="Generate pure sine, square, triangle, and saw waveforms instantly. Free in-browser Web Audio pitch generator.">
+
+  <!-- Structured Data: WebApplication, HowTo & FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "Tone Generator - Online Audio Frequency & Pitch Tool",
+        "url": "https://ahmedelazabdev.github.io/tonegenerator/",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All",
+        "description": "An online acoustics and sound frequency generator using the HTML5 Web Audio API. Generates sine, square, sawtooth, and triangle waves across the human audible spectrum (20Hz to 20,000Hz).",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "HowTo",
+        "name": "How to Generate and Play Audio Tones Online",
+        "description": "Step-by-step instructions to create pure sine, square, triangle, and sawtooth waves at custom frequencies.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Choose a Frequency",
+            "text": "Type any frequency value in Hertz (Hz) or use the logarithmic frequency slider (e.g., 440 Hz for Concert A, or 1000 Hz for standard calibration)."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Select Waveform Shape",
+            "text": "Pick from Sine (clean pure tone), Square (rich odd harmonics), Triangle (soft harmonics), or Sawtooth (bright, buzzy tone)."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Adjust Volume and Play",
+            "text": "Keep volume at a safe level (around 20-30%) before pressing Play to protect your ears and audio equipment."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Fine-Tune or Select Acoustic Presets",
+            "text": "Use the quick preset chips (432Hz, 440Hz, 1kHz, Sub-bass) or octave buttons to shift pitch instantly."
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the audible frequency range of human hearing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The typical healthy human ear can hear frequencies from approximately 20 Hz (very deep bass rumble) up to 20,000 Hz (20 kHz, extremely high-pitched whine). High-frequency sensitivity gradually diminishes with age and noise exposure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is 440 Hz used as the standard tuning pitch?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "440 Hz was internationally standardized (ISO 16) in 1955 as Concert Pitch (A4 above middle C). It serves as the universal reference frequency used by orchestras, instrument makers, and audio engineers worldwide."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between Sine and Square waveforms?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Sine wave produces only a single pure fundamental frequency with zero harmonic overtones. A Square wave contains the fundamental frequency plus all odd mathematical harmonics, creating a bright, buzzy, retro-synth timbre."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can this online tone generator damage speakers or headphones?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If played at excessively high volumes, high-frequency continuous tones can overheat tweeter voice coils, while sub-bass frequencies (<40 Hz) can drive woofers past their physical excursion limits. Always begin testing at low volume levels (under 25%)."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-soft: #eff6ff;
+      --accent: #047857;
+      --accent-soft: #d1fae5;
+      --accent-text: #064e3b;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #334155;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
+      --shadow-xl: 0 10px 25px -5px rgba(0,0,0,0.08);
+      --radius: 14px;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-rendering: optimizeSpeed;
+    }
+
+    /* Fixed 64px Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+      height: 64px;
+      overflow: hidden;
+    }
+
+    .nav-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .brand-badge {
+      background: #047857;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      font-weight: 800;
+    }
+
+    .status-tag {
+      background: var(--accent-soft);
+      color: var(--accent-text);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid #a7f3d0;
+    }
+
+    main {
+      max-width: 1050px;
+      width: 100%;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+      flex: 1;
+      contain: layout style;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Main Calculator Card */
+    .calc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      margin-bottom: 36px;
+    }
+
+    .card-topbar {
+      background: #f1f5f9;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .topbar-modes {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #e2e8f0;
+      padding: 4px;
+      border-radius: 8px;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-topbar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .btn-topbar:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-primary-action {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(29, 78, 216, 0.25);
+    }
+
+    .btn-primary-action:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Dual Workspace Grid */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    @media (max-width: 840px) {
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Input Controls */
+    .inputs-pane {
+      padding: 24px;
+      border-right: 1px solid var(--border);
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    @media (max-width: 840px) {
+      .inputs-pane {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-hint {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .input-unit-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .num-input {
+      flex: 1;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 12px;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .num-input:focus {
+      border-color: var(--primary);
+    }
+
+    select.unit-select {
+      width: 140px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 8px;
+      background: #f8fafc;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+
+    select.unit-select:focus {
+      border-color: var(--primary);
+    }
+
+    /* Slider styling */
+    .slider-range {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      outline: none;
+      -webkit-appearance: none;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    .slider-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: transform 0.1s;
+    }
+
+    .slider-range::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Button Tweak Bars */
+    .adjust-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip-btn {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .chip-btn:hover {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+
+    .chip-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    /* Big Toggle Play/Stop CTA */
+    .play-master-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 52px;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(4, 120, 87, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .play-master-btn:hover {
+      background: #065f46;
+      transform: translateY(-1px);
+    }
+
+    .play-master-btn.playing {
+      background: var(--danger);
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+      animation: pulse-ring 2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+    }
+
+    /* Right Live Results Summary */
+    .summary-pane {
+      padding: 24px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .score-card {
+      background: var(--surface);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+    }
+
+    .score-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .score-val {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      line-height: 1.1;
+      word-break: break-all;
+    }
+
+    .words-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1e3a8a;
+      line-height: 1.5;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+    }
+
+    .metrics-2x2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric-subcard {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .subcard-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .subcard-val {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .val-accent { color: #047857; }
+
+    /* Duration Breakdown Pill / Audio Band Banner */
+    .duration-banner {
+      background: var(--accent-soft);
+      border: 1px solid #a7f3d0;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Semantic 3-Step Instruction Bar */
+    .action-steps-bar {
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .action-steps-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: #1e40af;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-title {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Long-Form Knowledge Base */
+    .article-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+      content-visibility: auto;
+      contain-intrinsic-size: 1000px 1800px;
+    }
+
+    @media (max-width: 600px) {
+      .article-container {
+        padding: 24px 18px;
+      }
+    }
+
+    .article-container h2 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 36px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      position: relative;
+    }
+
+    .article-container h2::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .article-container h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .article-container h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 24px 0 12px;
+      color: #1e293b;
+    }
+
+    .article-container p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .article-container ul, .article-container ol {
+      margin: 0 0 24px 24px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    .article-container li {
+      margin-bottom: 10px;
+    }
+
+    .highlight-card {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 24px 0;
+      color: #1e3a8a;
+      font-size: 1rem;
+    }
+
+    /* Comparison Table in Article */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table.content-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    table.content-table thead {
+      background: #f1f5f9;
+    }
+
+    table.content-table th, table.content-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table.content-table th {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    table.content-table tbody tr:hover {
+      background-color: #f8fafc;
+    }
+
+    /* FAQ Accordion */
+    .faq-block {
+      margin-top: 24px;
+    }
+
+    .faq-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: #f8fafc;
+    }
+
+    .faq-header {
+      padding: 16px 20px;
+      font-weight: 700;
+      font-size: 1.02rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      color: var(--text);
+    }
+
+    .faq-header:hover {
+      color: var(--primary);
+    }
+
+    .faq-body {
+      padding: 0 20px 16px;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      display: none;
+      line-height: 1.7;
+    }
+
+    .faq-card.open {
+      background: var(--surface);
+      border-color: var(--primary);
+    }
+
+    .faq-card.open .faq-body {
+      display: block;
+    }
+
+    .faq-toggle {
+      font-size: 1.3rem;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .faq-card.open .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-xl);
+      transition: transform 0.25s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+
+    #toast.active {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 16px;
+      margin-top: auto;
+    }
+
+    .footer-wrap {
+      max-width: 1050px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .footer-nav a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 600;
+    }
+
+    .footer-nav a:hover {
+      color: var(--primary);
+    }
+
+    @media print {
+      header, .hero, .card-topbar, .topbar-actions, .action-steps-bar, .article-container, footer, #toast {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+      }
+      .calc-card, .calc-grid, .inputs-pane, .summary-pane {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        background: #ffffff;
+      }
+      .score-card {
+        border: 2px solid #000000;
+      }
+      .score-val {
+        color: #000000;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-inner">
+      <a href="https://ahmedelazabdev.github.io/tonegenerator/" class="brand">
+        <span class="brand-badge">🔊</span>
+        <span>Tone Generator</span>
+      </a>
+      <span class="status-tag">Pure Tone &amp; Waveform Tool</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Tone Generator 🔊 <span>Online Sound Frequency &amp; Pitch Tool</span></h1>
+      <p>Generate pure audio tones, calibrate monitors and headphones, run acoustic room sweeps, or tune musical instruments. High-precision Web Audio synthesis from 1 Hz to 20,000 Hz with instantaneous zero latency.</p>
+    </section>
+
+    <!-- Main Calculator Card -->
+    <section class="calc-card" id="calculator-app">
+      <div class="card-topbar">
+        <!-- Waveform Selector Switcher -->
+        <div class="topbar-modes">
+          <button class="tab-btn active" id="tab-sine" onclick="setWaveform('sine')">Sine Wave</button>
+          <button class="tab-btn" id="tab-square" onclick="setWaveform('square')">Square</button>
+          <button class="tab-btn" id="tab-triangle" onclick="setWaveform('triangle')">Triangle</button>
+          <button class="tab-btn" id="tab-sawtooth" onclick="setWaveform('sawtooth')">Sawtooth</button>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn-topbar btn-primary-action" onclick="copyToneSpecs()">
+            <span>📋 Copy Specs</span>
+          </button>
+          <button class="btn-topbar" onclick="window.print()">
+            <span>🖨️ Print Sheet</span>
+          </button>
+          <button class="btn-topbar" onclick="resetToneDefaults()">
+            <span>✖ Reset</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dual Workspace Grid -->
+      <div class="calc-grid">
+        <!-- Left: Input Controls -->
+        <div class="inputs-pane">
+          <!-- Frequency Input + Logarithmic Slider -->
+          <div class="form-group">
+            <div class="form-label">
+              <label for="inp-freq">Frequency (Hz):</label>
+              <span class="field-hint" id="freq-hint">Standard pitch reference</span>
+            </div>
+            <div class="input-unit-group">
+              <input type="number" id="inp-freq" class="num-input" value="440" min="1" max="20100" step="1" oninput="handleFreqTextInput()" aria-label="Frequency in Hertz">
+              <select id="sel-step-scale" class="unit-select" onchange="handleScaleChange()" aria-label="Frequency Scale Multiplier">
+                <option value="1" selected>Hertz (Hz)</option>
+                <option value="1000">Kilohertz (kHz)</option>
+              </select>
+            </div>
+            <!-- Logarithmic Audio Slider -->
+            <input type="range" id="slider-freq" class="slider-range" min="0" max="1000" value="482" oninput="handleSliderInput()" aria-label="Logarithmic Frequency Slider">
+          </div>
+
+          <!-- Quick Preset Chips -->
+          <div class="form-group">
+            <div class="form-label">
+              <span>Acoustic &amp; Tuning Presets:</span>
+              <span class="field-hint">Click to jump</span>
+            </div>
+            <div class="adjust-row">
+              <button type="button" class="chip-btn" onclick="applyPreset(60)">60 Hz (Sub)</button>
+              <button type="button" class="chip-btn" onclick="applyPreset(120)">120 Hz (Bass)</button>
+              <button type="button" class="chip-btn" onclick="applyPreset(432)">432 Hz (Verdi)</button>
+              <button type="button" class="chip-btn active" id="chip-440" onclick="applyPreset(440)">440 Hz (A4)</button>
+              <button type="button" class="chip-btn" onclick="applyPreset(1000)">1 kHz (Ref)</button>
+              <button type="button" class="chip-btn" onclick="applyPreset(10000)">10 kHz (High)</button>
+            </div>
+          </div>
+
+          <!-- Fine Pitch Shifter & Octave Multipliers -->
+          <div class="form-group">
+            <div class="form-label">
+              <span>Fine Adjustment &amp; Octaves:</span>
+              <span class="field-hint">Pitch shifts</span>
+            </div>
+            <div class="adjust-row">
+              <button type="button" class="chip-btn" onclick="shiftFreq(-10)">-10 Hz</button>
+              <button type="button" class="chip-btn" onclick="shiftFreq(-1)">-1 Hz</button>
+              <button type="button" class="chip-btn" onclick="shiftFreq(1)">+1 Hz</button>
+              <button type="button" class="chip-btn" onclick="shiftFreq(10)">+10 Hz</button>
+              <button type="button" class="chip-btn" onclick="shiftOctave(0.5)">½ (Octave Down)</button>
+              <button type="button" class="chip-btn" onclick="shiftOctave(2)">2× (Octave Up)</button>
+            </div>
+          </div>
+
+          <!-- Volume Slider -->
+          <div class="form-group">
+            <div class="form-label">
+              <label for="slider-vol">Volume: <strong id="disp-vol-pct">25%</strong></label>
+              <span class="field-hint">Smooth Anti-Click Gain</span>
+            </div>
+            <input type="range" id="slider-vol" class="slider-range" min="0" max="100" value="25" oninput="handleVolumeInput()" aria-label="Master Volume">
+          </div>
+
+          <!-- Master Play/Stop Audio Button -->
+          <div class="form-group" style="margin-top: 4px;">
+            <button type="button" id="btn-master-play" class="play-master-btn" onclick="toggleTonePlayback()">
+              <span id="play-icon">▶</span>
+              <span id="play-text">Start Playing Tone</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Live Results & Acoustics Summary -->
+        <div class="summary-pane">
+          <!-- Total Frequency Score Card -->
+          <div class="score-card">
+            <span class="score-title">Current Tone Output</span>
+            <div class="score-val" id="disp-main-freq">440.0 Hz</div>
+          </div>
+
+          <!-- Amount / Pitch In Musical Words -->
+          <div class="words-card" id="disp-pitch-words">
+            Musical Note: A4 (Concert Pitch 440 Hz) — Exact Pitch (0 cents).
+          </div>
+
+          <!-- Metrics 2x2 Grid -->
+          <div class="metrics-2x2-grid">
+            <div class="metric-subcard">
+              <span class="subcard-label">Active Waveform</span>
+              <span class="subcard-val val-accent" id="disp-active-wave">Sine Wave</span>
+            </div>
+            <div class="metric-subcard">
+              <span class="subcard-label">Wavelength (Air)</span>
+              <span class="subcard-val" id="disp-wavelength">0.78 m</span>
+            </div>
+          </div>
+
+          <!-- Duration / Audio Spectrum Band Banner -->
+          <div class="duration-banner" id="disp-band-banner">
+            <span>Audio Band: <strong>Midrange (Musical Pitch)</strong></span>
+            <span>(Standard Human Hearing)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Semantic 3-Step Instruction Bar -->
+      <div class="action-steps-bar">
+        <div class="action-step">
+          <span class="step-num">1</span>
+          <div class="step-text">
+            <strong class="step-title">Select Frequency &amp; Wave</strong>
+            <p>Pick a waveform (Sine, Square, Triangle, Saw) and type or drag your target frequency in Hertz.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <span class="step-num">2</span>
+          <div class="step-text">
+            <strong class="step-title">Adjust Safe Volume</strong>
+            <p>Start with a conservative volume (20–30%) to prevent hearing discomfort or speaker overload.</p>
+          </div>
+        </div>
+        <div class="action-step">
+          <span class="step-num">3</span>
+          <div class="step-text">
+            <strong class="step-title">Play, Tune &amp; Calibrate</strong>
+            <p>Hit Start to produce real-time zero-latency sound for audio testing, tuning, or sleep masking.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Acoustics Knowledge Base & Guide -->
+    <article class="article-container">
+      <h2>Understanding Audio Frequencies &amp; Pure Sound Synthesis</h2>
+      <p>
+        Sound in physical acoustics is an oscillatory pressure wave propagating through an elastic medium such as air. The rate at which these compression and rarefaction cycles occur per second determines the perceived <strong>pitch</strong>, quantified scientifically in <strong>Hertz (Hz)</strong>. A 1 Hz oscillation corresponds to one single back-and-forth cycle per second.
+      </p>
+
+      <div class="highlight-card">
+        <strong>💡 The Fundamental Law of Acoustics:</strong> Wavelength ($\lambda$) is inversely proportional to frequency ($f$), expressed by the formula $\lambda = \frac{v}{f}$, where $v \approx 343\text{ m/s}$ represents the speed of sound at room temperature ($20^\circ\text{C}$). A deep 40 Hz subwoofer wave measures 8.58 meters long, whereas a piercing 10,000 Hz tone measures only 3.43 centimeters.
+      </div>
+
+      <h2>The Four Fundamental Waveforms: Timbre and Harmonic Content</h2>
+      <p>
+        While pitch is governed entirely by frequency, the textural coloration or <em>timbre</em> of a sound is shaped by its harmonic overtones. This tone generator synthesizes the four fundamental geometric waveforms of analog and digital audio engineering:
+      </p>
+
+      <h3>1. Pure Sine Wave (Clean Tone)</h3>
+      <p>
+        The sine wave is the purest acoustic waveform in the universe. It contains strictly one isolated fundamental frequency ($f_0$) and precisely zero harmonic distortion or overtones. It is the primary tool for hearing audiology evaluations, room resonance calibration, and subwoofer crossover tuning.
+      </p>
+
+      <h3>2. Square Wave (Odd Harmonics)</h3>
+      <p>
+        Square waves alternate instantaneously between minimum and maximum peak voltages with a 50% duty cycle. Mathematically, they contain only odd integer multiples of the fundamental frequency ($3f_0, 5f_0, 7f_0...$) with amplitudes inversely proportional to the harmonic index ($1/n$). This produces a distinctly punchy, hollow, reedy tone quintessential to 8-bit chiptune synthesis.
+      </p>
+
+      <h3>3. Triangle Wave (Soft Overtones)</h3>
+      <p>
+        Like square waves, triangle waveforms contain exclusively odd harmonics; however, their harmonic power falls off dramatically faster at $1/n^2$. This produces a mellow, rounded woodwind-like character that sits comfortably between a sine wave and a square wave.
+      </p>
+
+      <h3>4. Sawtooth Wave (Full Harmonic Spectrum)</h3>
+      <p>
+        The sawtooth wave ramps upward linearly and drops instantaneously. It contains <strong>every integer harmonic</strong> (both even and odd: $2f_0, 3f_0, 4f_0, 5f_0...$). Because of its dense, aggressive harmonic spread, sawtooth waves are the gold standard starting point for subtractive analog synthesizers and brass emulations.
+      </p>
+
+      <h2>Quick Reference Conversion Table: Auditory Spectrum &amp; Musical Notes</h2>
+      <div class="table-wrap">
+        <table class="content-table">
+          <thead>
+            <tr>
+              <th>Frequency (Hz)</th>
+              <th>Musical Note (A4=440)</th>
+              <th>Acoustic Spectrum Band</th>
+              <th>Wavelength in Air</th>
+              <th>Common Real-World Analogy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>20 Hz – 60 Hz</strong></td>
+              <td>E0 – B1</td>
+              <td>Sub-Bass</td>
+              <td>17.15 m – 5.72 m</td>
+              <td>Earthquake rumbles, kick-drum sub, pipe organs</td>
+            </tr>
+            <tr>
+              <td><strong>60 Hz – 250 Hz</strong></td>
+              <td>B1 – B3</td>
+              <td>Bass</td>
+              <td>5.72 m – 1.37 m</td>
+              <td>Bass guitar fundamental, human male speaking fundamentals</td>
+            </tr>
+            <tr>
+              <td><strong>250 Hz – 500 Hz</strong></td>
+              <td>B3 – B4</td>
+              <td>Low Midrange</td>
+              <td>1.37 m – 0.69 m</td>
+              <td>Middle C (261.63 Hz), Concert Pitch A4 (440 Hz)</td>
+            </tr>
+            <tr>
+              <td><strong>500 Hz – 2,000 Hz</strong></td>
+              <td>B4 – B6</td>
+              <td>Midrange</td>
+              <td>68.6 cm – 17.1 cm</td>
+              <td>Telephone audio band, human speech intelligibility</td>
+            </tr>
+            <tr>
+              <td><strong>2,000 Hz – 6,000 Hz</strong></td>
+              <td>B6 – F#8</td>
+              <td>Upper Midrange</td>
+              <td>17.1 cm – 5.7 cm</td>
+              <td>Ear canal resonance peak (most sensitive to human ear)</td>
+            </tr>
+            <tr>
+              <td><strong>6,000 Hz – 20,000 Hz</strong></td>
+              <td>F#8 &amp; Above</td>
+              <td>High Frequency / Air</td>
+              <td>5.7 cm – 1.7 cm</td>
+              <td>Cymbal sizzle, CRT television hum, insect chirps</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Practical Applications of an Online Tone Generator</h2>
+      <ol>
+        <li><strong>Studio Monitor &amp; Room Mode Detection:</strong> Sweep slowly from 30 Hz to 200 Hz. If certain bass frequencies suddenly spike in loudness, you have found the standing wave resonance nodes of your physical listening space.</li>
+        <li><strong>Hearing Threshold Check:</strong> Test your personal high-frequency cutoff by playing a 12 kHz, 15 kHz, or 18 kHz tone at modest volumes. Age-related hearing loss (presbycusis) naturally rolls off frequencies above 14 kHz.</li>
+        <li><strong>Musical Instrument Calibration:</strong> Switch to 440 Hz (or 432 Hz) with a pure sine wave to tune guitars, violins, pianos, and synthesizers by ear without digital pitch drift.</li>
+        <li><strong>Tinnitus Relief &amp; Audio Masking:</strong> Dial in a soft frequency matching the internal ringing of subjective tinnitus to evaluate frequency masking thresholds.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions (FAQ)</h2>
+      <div class="faq-block">
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>What is the audible frequency range of human hearing?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            The typical healthy human ear can hear frequencies from approximately 20 Hz (very deep bass rumble) up to 20,000 Hz (20 kHz, extremely high-pitched whine). High-frequency sensitivity gradually diminishes with age and noise exposure.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Why is 440 Hz used as the standard tuning pitch?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            440 Hz was internationally standardized (ISO 16) in 1955 as Concert Pitch (A4 above middle C). It serves as the universal reference frequency used by orchestras, instrument makers, and audio engineers worldwide.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>What is the difference between Sine and Square waveforms?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            A Sine wave produces only a single pure fundamental frequency with zero harmonic overtones. A Square wave contains the fundamental frequency plus all odd mathematical harmonics, creating a bright, buzzy, retro-synth timbre.
+          </div>
+        </div>
+
+        <div class="faq-card">
+          <div class="faq-header" onclick="toggleFaqCard(this)">
+            <span>Can this online tone generator damage speakers or headphones?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-body">
+            If played at excessively high volumes, high-frequency continuous tones can overheat tweeter voice coils, while sub-bass frequencies (&lt;40 Hz) can drive woofers past their physical excursion limits. Always begin testing at low volume levels (under 25%).
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast">Ready!</div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-wrap">
+      <p>© <span id="current-year"></span> All rights reserved — Tone Generator &amp; Online Audio Acoustics Tool.</p>
+      <div class="footer-nav">
+        <a href="#calculator-app">Tone Generator</a>
+        <a href="https://1io-site.blogspot.com" target="_blank" rel="noopener">By: 1io.site</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Web Audio Synthesis Engine -->
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Synthesis Core State
+    let audioCtx = null;
+    let oscNode = null;
+    let gainNode = null;
+    let isPlaying = false;
+    let currentWaveform = 'sine'; // sine, square, triangle, sawtooth
+    let currentFreq = 440;
+    let currentGain = 0.25;
+
+    // UI Element References
+    const inpFreq = document.getElementById('inp-freq');
+    const sliderFreq = document.getElementById('slider-freq');
+    const selStepScale = document.getElementById('sel-step-scale');
+    const sliderVol = document.getElementById('slider-vol');
+    const dispVolPct = document.getElementById('disp-vol-pct');
+    const btnMasterPlay = document.getElementById('btn-master-play');
+    const playIcon = document.getElementById('play-icon');
+    const playText = document.getElementById('play-text');
+
+    const dispMainFreq = document.getElementById('disp-main-freq');
+    const dispPitchWords = document.getElementById('disp-pitch-words');
+    const dispActiveWave = document.getElementById('disp-active-wave');
+    const dispWavelength = document.getElementById('disp-wavelength');
+    const dispBandBanner = document.getElementById('disp-band-banner');
+
+    // Note Name Constants for Musical Calculation
+    const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+    // Logarithmic slider helpers (20 Hz - 20,000 Hz mapping)
+    const MIN_FREQ = 20;
+    const MAX_FREQ = 20000;
+    const MIN_LOG = Math.log(MIN_FREQ);
+    const MAX_LOG = Math.log(MAX_FREQ);
+
+    function freqToSliderPos(freq) {
+      const clamped = Math.max(MIN_FREQ, Math.min(MAX_FREQ, freq));
+      return ((Math.log(clamped) - MIN_LOG) / (MAX_LOG - MIN_LOG)) * 1000;
+    }
+
+    function sliderPosToFreq(pos) {
+      return Math.exp(MIN_LOG + (pos / 1000) * (MAX_LOG - MIN_LOG));
+    }
+
+    // Audio Context Initializer (User Gesture Guard)
+    function getOrCreateAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Waveform Switcher
+    function setWaveform(type) {
+      currentWaveform = type;
+      ['sine', 'square', 'triangle', 'sawtooth'].forEach(w => {
+        document.getElementById(`tab-${w}`).classList.toggle('active', w === type);
+      });
+
+      const readableNames = {
+        'sine': 'Sine Wave (Pure)',
+        'square': 'Square Wave (Odd)',
+        'triangle': 'Triangle Wave',
+        'sawtooth': 'Sawtooth Wave'
+      };
+
+      dispActiveWave.textContent = readableNames[type] || type;
+
+      if (oscNode && audioCtx) {
+        oscNode.type = currentWaveform;
+      }
+      updateToneAnalysis();
+    }
+
+    // Scale Switcher (Hz vs kHz)
+    function handleScaleChange() {
+      const scale = parseFloat(selStepScale.value);
+      const hint = document.getElementById('freq-hint');
+      if (scale === 1000) {
+        hint.textContent = 'Kilohertz multiplier (1 kHz = 1000 Hz)';
+      } else {
+        hint.textContent = 'Cycles per second (Hertz)';
+      }
+      handleFreqTextInput();
+    }
+
+    function handleFreqTextInput() {
+      const rawVal = parseFloat(inpFreq.value) || 1;
+      const scale = parseFloat(selStepScale.value) || 1;
+      const freq = Math.min(20100, Math.max(1, rawVal * scale));
+      currentFreq = freq;
+
+      // Sync Slider
+      sliderFreq.value = freqToSliderPos(freq);
+
+      // Apply to running oscillator
+      applyOscillatorFrequency(freq);
+      updateToneAnalysis();
+    }
+
+    function handleSliderInput() {
+      const pos = parseFloat(sliderFreq.value);
+      const freq = Math.round(sliderPosToFreq(pos));
+      currentFreq = freq;
+
+      const scale = parseFloat(selStepScale.value) || 1;
+      inpFreq.value = (freq / scale).toFixed(scale === 1000 ? 2 : 0);
+
+      applyOscillatorFrequency(freq);
+      updateToneAnalysis();
+    }
+
+    function handleVolumeInput() {
+      const val = parseInt(sliderVol.value, 10);
+      dispVolPct.textContent = val + '%';
+      currentGain = val / 100;
+
+      if (gainNode && audioCtx && isPlaying) {
+        // Smooth exponential-like ramp to prevent pops
+        gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+        gainNode.gain.setTargetAtTime(currentGain, audioCtx.currentTime, 0.015);
+      }
+    }
+
+    function applyOscillatorFrequency(freq) {
+      if (oscNode && audioCtx && isPlaying) {
+        oscNode.frequency.cancelScheduledValues(audioCtx.currentTime);
+        oscNode.frequency.setTargetAtTime(freq, audioCtx.currentTime, 0.01);
+      }
+    }
+
+    function applyPreset(freq) {
+      currentFreq = freq;
+      selStepScale.value = '1';
+      inpFreq.value = freq;
+      sliderFreq.value = freqToSliderPos(freq);
+
+      // Highlight preset chips
+      document.querySelectorAll('.adjust-row .chip-btn').forEach(btn => btn.classList.remove('active'));
+      const activeChip = Array.from(document.querySelectorAll('.adjust-row .chip-btn'))
+        .find(b => b.textContent.includes(freq.toString()));
+      if (activeChip) activeChip.classList.add('active');
+
+      applyOscillatorFrequency(freq);
+      updateToneAnalysis();
+      showToast(`Tuned to ${freq} Hz`);
+    }
+
+    function shiftFreq(delta) {
+      let next = Math.max(1, Math.min(20100, currentFreq + delta));
+      applyPreset(next);
+    }
+
+    function shiftOctave(mult) {
+      let next = Math.max(1, Math.min(20100, Math.round(currentFreq * mult)));
+      applyPreset(next);
+    }
+
+    // Toggle Sound Engine Playback
+    function toggleTonePlayback() {
+      if (isPlaying) {
+        stopTone();
+      } else {
+        startTone();
+      }
+    }
+
+    function startTone() {
+      const ctx = getOrCreateAudioContext();
+
+      // Create new oscillator and gain
+      oscNode = ctx.createOscillator();
+      gainNode = ctx.createGain();
+
+      oscNode.type = currentWaveform;
+      oscNode.frequency.setValueAtTime(currentFreq, ctx.currentTime);
+
+      // Smooth anti-pop ramp-in
+      gainNode.gain.setValueAtTime(0, ctx.currentTime);
+      gainNode.gain.setTargetAtTime(currentGain, ctx.currentTime, 0.02);
+
+      oscNode.connect(gainNode);
+      gainNode.connect(ctx.destination);
+
+      oscNode.start();
+      isPlaying = true;
+
+      // Update UI button state
+      btnMasterPlay.classList.add('playing');
+      playIcon.textContent = '⏹';
+      playText.textContent = 'Stop Audio Tone';
+      showToast('🔊 Tone started');
+    }
+
+    function stopTone() {
+      if (!isPlaying || !oscNode) return;
+
+      const ctx = audioCtx;
+      if (ctx && gainNode) {
+        // Quick ramp down to prevent physical speaker click
+        gainNode.gain.cancelScheduledValues(ctx.currentTime);
+        gainNode.gain.setTargetAtTime(0, ctx.currentTime, 0.02);
+
+        setTimeout(() => {
+          try {
+            oscNode.stop();
+            oscNode.disconnect();
+          } catch(e) {}
+          isPlaying = false;
+          btnMasterPlay.classList.remove('playing');
+          playIcon.textContent = '▶';
+          playText.textContent = 'Start Playing Tone';
+        }, 40);
+      } else {
+        isPlaying = false;
+        btnMasterPlay.classList.remove('playing');
+        playIcon.textContent = '▶';
+        playText.textContent = 'Start Playing Tone';
+      }
+      showToast('Tone stopped');
+    }
+
+    // Mathematical Pitch & Wavelength Analysis
+    function calculateMusicalNote(f) {
+      if (f <= 0) return { noteStr: 'N/A', cents: 0 };
+      // MIDI formula: n = 69 + 12 * log2(f / 440)
+      const midiNum = 69 + 12 * (Math.log(f / 440) / Math.LN2);
+      const roundedMidi = Math.round(midiNum);
+      const cents = Math.round((midiNum - roundedMidi) * 100);
+
+      const noteIdx = ((roundedMidi % 12) + 12) % 12;
+      const octave = Math.floor(roundedMidi / 12) - 1;
+      const noteName = NOTE_NAMES[noteIdx] + octave;
+
+      return { noteName, cents };
+    }
+
+    function updateToneAnalysis() {
+      dispMainFreq.textContent = `${currentFreq.toFixed(1)} Hz`;
+
+      // Wavelength in air (v = 343 m/s)
+      const wavelength = 343 / currentFreq;
+      if (wavelength >= 1) {
+        dispWavelength.textContent = `${wavelength.toFixed(2)} m`;
+      } else {
+        dispWavelength.textContent = `${(wavelength * 100).toFixed(1)} cm`;
+      }
+
+      // Note calculation
+      const pitch = calculateMusicalNote(currentFreq);
+      const centsStr = pitch.cents === 0 ? "Exact pitch (0 cents)" : `${pitch.cents > 0 ? '+' : ''}${pitch.cents} cents`;
+      dispPitchWords.textContent = `Musical Note: ${pitch.noteName} (${centsStr}) — Continuous ${currentWaveform.toUpperCase()} wave.`;
+
+      // Spectrum classification
+      let band = "Midrange";
+      let context = "Standard Human Hearing";
+
+      if (currentFreq < 20) {
+        band = "Infrasound (<20 Hz)";
+        context = "Physical Vibration (Unheard)";
+      } else if (currentFreq <= 60) {
+        band = "Sub-Bass (20–60 Hz)";
+        context = "Deep Subwoofer & Rumble";
+      } else if (currentFreq <= 250) {
+        band = "Bass (60–250 Hz)";
+        context = "Bass Guitar & Kick Drums";
+      } else if (currentFreq <= 2000) {
+        band = "Midrange (250–2 kHz)";
+        context = "Human Speech & Melody";
+      } else if (currentFreq <= 6000) {
+        band = "Upper Midrange (2–6 kHz)";
+        context = "Ear Canal Sensitivity Peak";
+      } else if (currentFreq <= 16000) {
+        band = "High Treble (6–16 kHz)";
+        context = "Cymbal Air & Presence";
+      } else {
+        band = "Very High Pitch (>16 kHz)";
+        context = "Near Human Limit / Mosquito";
+      }
+
+      dispBandBanner.innerHTML = `
+        <span>Audio Band: <strong>${band}</strong></span>
+        <span>(${context})</span>
+      `;
+    }
+
+    function resetToneDefaults() {
+      if (isPlaying) stopTone();
+      currentFreq = 440;
+      currentGain = 0.25;
+      inpFreq.value = '440';
+      selStepScale.value = '1';
+      sliderVol.value = '25';
+      dispVolPct.textContent = '25%';
+      sliderFreq.value = freqToSliderPos(440);
+      setWaveform('sine');
+      applyPreset(440);
+      showToast('Reset to default (440 Hz Concert A)');
+    }
+
+    function copyToneSpecs() {
+      const pitch = calculateMusicalNote(currentFreq);
+      const wavelength = (343 / currentFreq).toFixed(3);
+
+      let summary = `=================================\n`;
+      summary += `     AUDIO TONE GENERATOR DATA   \n`;
+      summary += `=================================\n`;
+      summary += `Frequency:     ${currentFreq} Hz\n`;
+      summary += `Waveform:      ${currentWaveform.toUpperCase()}\n`;
+      summary += `Musical Note:  ${pitch.noteName} (${pitch.cents >= 0 ? '+' : ''}${pitch.cents} cents)\n`;
+      summary += `Wavelength:    ${wavelength} meters in air (20°C)\n`;
+      summary += `Volume Level:  ${sliderVol.value}%\n`;
+      summary += `Timestamp:     ${new Date().toISOString()}\n`;
+      summary += `Generator:     https://ahmedelazabdev.github.io/tonegenerator/\n`;
+      summary += `=================================\n`;
+
+      navigator.clipboard.writeText(summary).then(() => {
+        showToast('📋 Audio specifications copied!');
+      }).catch(() => {
+        showToast('Specs copied!');
+      });
+    }
+
+    function toggleFaqCard(header) {
+      header.parentElement.classList.toggle('open');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('active');
+      setTimeout(() => {
+        toast.classList.remove('active');
+      }, 3000);
+    }
+
+    // Initialize UI on load
+    sliderFreq.value = freqToSliderPos(440);
+    updateToneAnalysis();
+  </script>
+</body>
+</html>
